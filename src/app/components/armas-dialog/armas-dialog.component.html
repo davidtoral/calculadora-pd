@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Elige la cantidad</h1>
+<div mat-dialog-content>
+  <div *ngFor="let arma of armasMulta">
+    <mat-form-field>
+      <mat-label>{{ arma.arma }}</mat-label>
+      <input type="number" matInput [(ngModel)]="arma.cantidad">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dismiss()">Cancelar</button>
+  <button mat-button (click)="saveArmas()" cdkFocusInitial>Ok</button>
+</div>

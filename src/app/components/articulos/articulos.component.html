@@ -1,0 +1,57 @@
+<div id="articulos" (resized)="bodyResized($event)">
+  <mat-toolbar color="primary" class="header">
+    <span>Calculadora de delitos LSPD</span>
+  </mat-toolbar>
+
+  <div class="content">
+    <div>
+    <mat-card (resized)="cardResized($event)">
+      <p><strong>Artículos seleccionados:</strong> {{ getSeleccionados() }}</p>
+      <p *ngIf="atenuanteOAgravante"><strong>{{ atenuanteOAgravante.agravante ? 'Agravante' : 'Atenuante' }}:</strong>
+        {{ atenuanteOAgravante.num + '. ' + atenuanteOAgravante.titulo }}</p>
+      <p *ngIf="getTotal('puntos') > 0"><strong>Puntos:</strong> {{ getTotal('puntos') }}</p>
+      <p><strong>Multa:</strong> La multa es de {{ getTotal('multa') }}$<span *ngIf="getTotal('multa') !== getTotalConFianza()">, si paga fianza {{ getTotalConFianza() }}$</span></p>
+      <p><strong>Condena:</strong> La condena es de {{ getTotal('condena') }} años<span *ngIf="getTotal('condena') !== getTotalAniosConFianza()">, si paga fianza {{ getTotalAniosConFianza() }} años</span></p>
+      <p><strong>Calabozos:</strong> {{ tieneCalabozos() ? 'Si' : 'No' }}<span *ngIf="tieneCalabozos() && !tieneCalabozosConFianza()">, si paga fianza no.</span></p>
+
+      <button mat-stroked-button color="primary" [disabled]="getSeleccionados().length === 0" (click)="deseleccionarTodos()">Deseleccionar todos</button>
+      <button mat-stroked-button color="primary" [disabled]="getSeleccionados().length === 0" (click)="openAtenuanteAgravanteDialog()">Atenuantes /
+        Agravantes</button>
+      <button mat-stroked-button color="primary" [disabled]="getSeleccionados().length === 0" (click)="openDesgloseDialog()">Desglose de cargos</button>
+      <button mat-stroked-button color="primary" (click)="expandirTodos()" matTooltip="Expande todos si quieres usar Control + F">{{ expandidos ? 'Cerrar todos' : 'Expandir todos' }}</button>
+    </mat-card>
+    </div>
+
+    <!-- <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Buscar</mat-label>
+      <input matInput [(ngModel)]="searchText">
+  </mat-form-field>
+  </div> -->
+
+  <div [style.margin-top]="((bodyWidth >= 768 ? cardHeight : 0) + 16) + 'px'">
+    <mat-expansion-panel *ngFor="let capitulo of capitulos | filter: searchText; let i = index" [expanded]="expandidos">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ 'Capítulo ' + capitulo.num }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ capitulo.titulo }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-selection-list color="primary">
+        <mat-list-option *ngFor="let articulo of capitulo.articulos | filter: searchText; let j = index"
+          [selected]="articulo.seleccionado" [disabled]="comprobarPrevalece(articulo)"
+          (click)="articulo.seleccionado = !articulo.seleccionado; desmarcarPrevalece(articulo, i, j)" [ngClass]="{'bold': articulo.seleccionado}">
+          {{ articulo.articulo + ' - ' + articulo.titulo }}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-expansion-panel>
+    </div>
+
+  </div>
+
+  <mat-toolbar color="primary" class="footer">
+    <span>Desarrollo realizado por erRs para LU-RP</span>
+  </mat-toolbar>
+</div>

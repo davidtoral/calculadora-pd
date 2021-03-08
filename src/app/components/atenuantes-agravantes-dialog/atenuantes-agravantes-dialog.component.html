@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Elige atenuante/agravante</h1>
+<div mat-dialog-content>
+  <div>
+    <h1>Atenuantes</h1>
+    <mat-radio-group [(ngModel)]="seleccionado" color="primary">
+      <mat-radio-button *ngFor="let atenuante of atenuantes" [value]="atenuante">
+        <span class="wrap-mat-radio-label">
+          {{ atenuante.titulo }}
+        </span>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div>
+    <h1>Agravantes</h1>
+    <mat-radio-group [(ngModel)]="seleccionado" color="primary">
+      <mat-radio-button *ngFor="let agravante of agravantes" [value]="agravante">
+        <span class="wrap-mat-radio-label">
+          {{ agravante.titulo }}
+        </span>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button color="warn" (click)="dismiss()">Deseleccionar</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="!seleccionado" cdkFocusInitial>Ok</button>
+</div>
