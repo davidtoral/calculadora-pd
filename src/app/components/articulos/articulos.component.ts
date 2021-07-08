@@ -10,6 +10,7 @@ import { CantidadDialogComponent } from '../cantidad-dialog/cantidad-dialog.comp
 import { DesgloseDialogComponent } from '../desglose-dialog/desglose-dialog.component';
 import { DrogasDialogComponent } from '../drogas-dialog/drogas-dialog.component';
 import { ResizedEvent } from 'angular-resize-event';
+import { AdvertenciaDialogComponent } from './../advertencia-dialog/advertencia-dialog.component';
 
 @Component({
   selector: 'app-articulos',
@@ -27,11 +28,21 @@ export class ArticulosComponent implements OnInit {
   cardHeight: number;
   bodyWidth: number;
 
+  // Advertencia de uso de la calculadora al iniciar
+  advertenciaInicial = true;
+
+  // Deshabilitar/habilitar calculadora
+  calculadoraHabilitada = true;
+
   constructor(private articulosService: ArticulosService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.capitulos = this.articulosService.getCapitulos();
     this.fianzas = this.articulosService.getFianzas();
+
+    if (this.advertenciaInicial) {
+      this.openAdvertenciaDialog();
+    }
   }
 
   // Comprobar si el artículo tiene algún extra
@@ -300,6 +311,17 @@ export class ArticulosComponent implements OnInit {
         articulos: arts
       }
     });
+  }
+
+  // Abrir el dialog para advertir del uso de la calculadora
+  openAdvertenciaDialog(): void {
+    const dialogRef = this.dialog.open(AdvertenciaDialogComponent, {
+    });
+  }
+
+  // Abrir código penal (enlace a LURP)
+  abrirCodigoPenal(): void {
+    window.open('https://www.lu-rp.es/foro/thread-316.html', '_blank')
   }
 
   // Expandir todos los capitulos

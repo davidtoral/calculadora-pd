@@ -27,6 +27,7 @@ import { DrogasDialogComponent } from './components/drogas-dialog/drogas-dialog.
 import { AtenuantesAgravantesDialogComponent } from './components/atenuantes-agravantes-dialog/atenuantes-agravantes-dialog.component';
 import { DesgloseDialogComponent } from './components/desglose-dialog/desglose-dialog.component';
 import { AngularResizedEventModule } from 'angular-resize-event';
+import { AdvertenciaDialogComponent } from './components/advertencia-dialog/advertencia-dialog.component';
 
 
 @NgModule({
@@ -38,10 +39,11 @@ import { AngularResizedEventModule } from 'angular-resize-event';
     DrogasDialogComponent,
     AtenuantesAgravantesDialogComponent,
     DesgloseDialogComponent,
+    AdvertenciaDialogComponent,
     FilterPipe
   ],
   imports: [
-    CommonModule,
+  CommonModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
