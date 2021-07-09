@@ -1,8 +1,8 @@
 # CalculadoraPd
 
-Projecto generado con [Angular CLI](https://github.com/angular/angular-cli) versión 11.2.1.
+Projecto generado con [Angular CLI](https://github.com/angular/angular-cli) versión 11.2.1 usando Angular Universal (SSR).
 
-Creado por erRs para Leyendas Urbanas Roleplay. Usable en https://calculadora-pd.web.app/
+Creado por erRs para Leyendas Urbanas Roleplay. Usable en https://calculadora-pd.herokuapp.com/
 
 ## Usar en local
 
