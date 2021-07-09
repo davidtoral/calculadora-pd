@@ -46,7 +46,7 @@ import { AdvertenciaDialogComponent } from './components/advertencia-dialog/adve
   CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularResizedEventModule,
